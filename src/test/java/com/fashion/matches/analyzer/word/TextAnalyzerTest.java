@@ -53,6 +53,18 @@ public class TextAnalyzerTest {
         assertWords(textAnalyzer.getMostOccurringWords(text), "wont", "won't");
     }
 
+    @Test
+    public void shouldReturnAnyTopThreeUniqueWords_whenGivenTextContainsEqualNumberofTopThreeUniqueWords() {
+
+        final String text = "a a bb bb ccc ccc dddd dddd eeeee";
+
+        final String[] words = textAnalyzer.getMostOccurringWords(text);
+
+        assertThat(words.length).isEqualTo(3);
+        assertThat(words).containsAnyOf("a", "b", "c", "d");
+        assertThat(words).doesNotContain("eeeee");
+    }
+
     private void assertWords(String[] words, String... expectedWords) {
 
         assertThat(words).isNotEmpty();
