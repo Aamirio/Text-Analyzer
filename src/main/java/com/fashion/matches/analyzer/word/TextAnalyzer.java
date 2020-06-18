@@ -1,7 +1,10 @@
 package com.fashion.matches.analyzer.word;
 
 import java.util.Arrays;
+import java.util.LinkedHashMap;
+import java.util.Map;
 import java.util.function.Function;
+import java.util.stream.Collectors;
 
 import static java.util.stream.Collectors.*;
 
@@ -18,6 +21,9 @@ public class TextAnalyzer {
 
         return Arrays.stream(text.split(" ")).parallel()
                 .collect(groupingByConcurrent(Function.identity(), counting()))
+                .entrySet().parallelStream()
+                .sorted((Map.Entry.<String, Long>comparingByValue().reversed()))
+                .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue, (e1, e2) -> e1, LinkedHashMap::new))
                 .keySet().parallelStream()
                 .limit(3).filter(x -> !x.isEmpty()).toArray(String[]::new);
     }
