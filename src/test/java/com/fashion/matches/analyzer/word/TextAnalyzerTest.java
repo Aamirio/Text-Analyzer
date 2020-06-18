@@ -65,6 +65,22 @@ public class TextAnalyzerTest {
         assertThat(words).doesNotContain("eeeee");
     }
 
+    @Test
+    public void shouldReturnOnlyTopTwoUniqueWords_whenGivenTextContainsOnlyTwoUniqueWords() {
+
+        final String text = "a a a bb bb";
+
+        assertWords(textAnalyzer.getMostOccurringWords(text), "a", "bb");
+    }
+
+    @Test
+    public void shouldReturnOnlyOneWord_whenGivenTextContainsOnlyOneUniqueWord() {
+
+        final String text = "a a a";
+
+        assertWords(textAnalyzer.getMostOccurringWords(text), "a");
+    }
+
     private void assertWords(String[] words, String... expectedWords) {
 
         assertThat(words).isNotEmpty();
