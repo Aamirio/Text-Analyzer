@@ -37,6 +37,14 @@ public class TextAnalyzerTest {
         assertWords(textAnalyzer.getMostOccurringWords(text), "a", "bb", "ccc");
     }
 
+    @Test
+    public void shouldReturnWordsWithoutPunctuation_whenTextGivenWithPunctuation() {
+
+        final String text = "a\n (a a) a@ //a b:b %bb b_b ?ccc cc*c";
+
+        assertWords(textAnalyzer.getMostOccurringWords(text), "a", "bb", "ccc");
+    }
+
     private void assertWords(String[] words, String... expectedWords) {
 
         assertThat(words).isNotEmpty();

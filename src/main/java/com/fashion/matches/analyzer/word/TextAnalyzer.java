@@ -19,7 +19,7 @@ public class TextAnalyzer {
      */
     public String[] getMostOccurringWords(String text) {
 
-        final String[] words = text.toLowerCase().split(" ");
+        final String[] words = text.replaceAll("[^a-zA-Z ]", "").toLowerCase().split("\\s+");
 
         return Arrays.stream(words).parallel()
                 .collect(groupingByConcurrent(Function.identity(), counting()))
