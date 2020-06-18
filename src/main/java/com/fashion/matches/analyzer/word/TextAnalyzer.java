@@ -19,7 +19,9 @@ public class TextAnalyzer {
      */
     public String[] getMostOccurringWords(String text) {
 
-        return Arrays.stream(text.split(" ")).parallel()
+        final String[] words = text.toLowerCase().split(" ");
+
+        return Arrays.stream(words).parallel()
                 .collect(groupingByConcurrent(Function.identity(), counting()))
                 .entrySet().parallelStream()
                 .sorted((Map.Entry.<String, Long>comparingByValue().reversed()))
