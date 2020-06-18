@@ -19,6 +19,6 @@ public class TextAnalyzer {
         return Arrays.stream(text.split(" ")).parallel()
                 .collect(groupingByConcurrent(Function.identity(), counting()))
                 .keySet().parallelStream()
-                .toArray(String[]::new);
+                .limit(3).filter(x -> !x.isEmpty()).toArray(String[]::new);
     }
 }

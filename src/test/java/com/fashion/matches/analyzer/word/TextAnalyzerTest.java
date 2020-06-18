@@ -9,13 +9,13 @@ public class TextAnalyzerTest {
     private final TextAnalyzer textAnalyzer = new TextAnalyzer();
 
     @Test
-    public void shouldReturnOnlyUniqueWords_whenGivenTextContainsDuplicateWords() {
+    public void shouldReturnOnlyTopThreeUniqueWords_whenGivenTextContainsDuplicateWords() {
 
         final String text = "a a a a bb bb bb ccc ccc dddd";
 
         final String[] words = textAnalyzer.getMostOccurringWords(text);
 
-        assertThat(words).containsOnly("a", "bb", "ccc", "dddd");
+        assertThat(words).containsOnly("a", "bb", "ccc");
     }
 
 }
