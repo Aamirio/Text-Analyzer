@@ -1,5 +1,10 @@
 package com.fashion.matches.analyzer.word;
 
+import java.util.Arrays;
+import java.util.function.Function;
+
+import static java.util.stream.Collectors.*;
+
 public class TextAnalyzer {
 
     /**
@@ -11,6 +16,9 @@ public class TextAnalyzer {
      */
     public String[] getMostOccurringWords(String text) {
 
-        return null;
+        return Arrays.stream(text.split(" ")).parallel()
+                .collect(groupingByConcurrent(Function.identity(), counting()))
+                .keySet().parallelStream()
+                .toArray(String[]::new);
     }
 }
