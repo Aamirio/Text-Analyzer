@@ -45,6 +45,14 @@ public class TextAnalyzerTest {
         assertWords(textAnalyzer.getMostOccurringWords(text), "a", "bb", "ccc");
     }
 
+    @Test
+    public void shouldReturnWordsPreservingApostrophes_whenTextGivenWithApostrophes() {
+
+        final String text = "won't wont wont";
+
+        assertWords(textAnalyzer.getMostOccurringWords(text), "wont", "won't");
+    }
+
     private void assertWords(String[] words, String... expectedWords) {
 
         assertThat(words).isNotEmpty();
