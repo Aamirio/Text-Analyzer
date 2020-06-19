@@ -81,6 +81,33 @@ public class TextAnalyzerTest {
         assertWords(textAnalyzer.getMostOccurringWords(text), "a");
     }
 
+    @Test
+    public void shouldReturnEmptyArray_whenGivenTextIsBlank() {
+
+        final String[] result = textAnalyzer.getMostOccurringWords("    ");
+
+        assertThat(result).isNotNull();
+        assertThat(result).isEmpty();
+    }
+
+    @Test
+    public void shouldReturnEmptyArray_whenGivenTextIsEmpty() {
+
+        final String[] result = textAnalyzer.getMostOccurringWords("");
+
+        assertThat(result).isNotNull();
+        assertThat(result).isEmpty();
+    }
+
+    @Test
+    public void shouldReturnEmptyArray_whenGivenTextIsNull() {
+
+        final String[] result = textAnalyzer.getMostOccurringWords(null);
+
+        assertThat(result).isNotNull();
+        assertThat(result).isEmpty();
+    }
+
     private void assertWords(String[] words, String... expectedWords) {
 
         assertThat(words).isNotEmpty();
